@@ -1,0 +1,8 @@
+Input features (first 5): [0.70444619 0.9295336  0.72433652 0.83201928 0.76473068]
+Scaled features (first 5): [ 0.70444619  0.9295336   0.72433652 32.13191187 46.03460963]
+Scaled min: 0.7044461863532665 max: 82.13093992825675
+Are there NaNs? False
+Scaler mean: [ 0.          0.          0.         -0.03526206 -0.06719635]
+Scaler scale: [1.         1.         1.         0.02699128 0.01807177]
+Prediction distribution: [[0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]]
+Decoded: ZERO

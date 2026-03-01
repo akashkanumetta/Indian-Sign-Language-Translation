@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>SignLink AI | Home</title>
+  <style>
+    /* Reset and Typography Variables */
+    :root {
+      --brand-copper: #c58255;
+      --brand-dark: #001a1c;
+      /* Slightly richer dark teal */
+      --brand-darker: #000c0d;
+      --text-muted: #94a3b8;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: inherit;
+      overflow-x: hidden;
+      background-color: var(--brand-darker);
+    }
+
+    /* Navigation - Match the screenshot perfectly */
+    nav {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      padding: 2.5rem 5rem;
+      display: flex;
+      justify-content: flex-end;
+      z-index: 100;
+      background: transparent !important;
+    }
+
+    .nav__links {
+      display: flex;
+      gap: 3rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav__links .link a {
+      color: var(--white) !important;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav__links .link a:hover {
+      color: var(--brand-copper) !important;
+      background-color: transparent !important;
+    }
+
+    /* Hero Section - The Split Layout */
+    .hero-split {
+      display: flex;
+      width: 100vw;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Left Side */
+    .hero-left {
+      width: 42vw;
+      background-image: url('green-gradient.jpg');
+      background-size: cover;
+      background-position: center right;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+      /* Push content to right edge of container */
+      padding: 0 4rem 0 2rem;
+      /* Give breathing room from the split */
+      position: relative;
+    }
+
+    /* Subtle texture */
+    .hero-left::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+      background-size: 20px 20px;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    .left-content-wrapper {
+      text-align: right;
+      max-width: 500px;
+      z-index: 10;
+      animation: fadeSlideInLeft 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    .hero-left h2 {
+      color: var(--brand-copper);
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin: 0 0 1.2rem 0;
+    }
+
+    .hero-left p {
+      color: var(--brand-darker);
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin: 0 0 2rem 0;
+      line-height: 1.6;
+    }
+
+    /* Left Stats Box */
+    .left-stats-container {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: flex-end;
+      margin-top: 2rem;
+    }
+
+    .left-stat {
+      background: rgba(255, 255, 255, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(10px);
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .left-stat h4 {
+      color: var(--brand-darker);
+      font-size: 2rem;
+      margin: 0 0 0.2rem 0;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .left-stat span {
+      color: var(--brand-darker);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--brand-darker);
+      color: var(--brand-copper);
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Center Image (The Hands) */
+    .hero-hands-center {
+      position: absolute;
+      top: -10%;
+      /* Anchor to top to hide wrist cut */
+      left: 42vw;
+      /* Anchor exactly to the 42% split width */
+      transform: translateX(-40%);
+      /* shift left to center bodies over line */
+      width: auto;
+      height: 120vh;
+      /* Fill screen height and hide top cut */
+      max-width: none;
+      z-index: 50;
+      pointer-events: none;
+      filter: drop-shadow(-15px 15px 25px rgba(0, 0, 0, 0.4));
+      /* Deep cinematic shadow */
+      animation: handsRise 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards, handsBreathe 8s ease-in-out infinite 1.5s;
+    }
+
+    /* Right Side */
+    .hero-right {
+      width: 58vw;
+      background: linear-gradient(135deg, var(--brand-dark), var(--brand-darker));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+      /* Right align perfectly */
+      padding: 0 6rem 0 10rem;
+      position: relative;
+    }
+
+    /* Subtle ambient glow behind text */
+    .hero-right::before {
+      content: '';
+      position: absolute;
+      top: 20%;
+      right: 10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(197, 130, 85, 0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .right-content-wrapper {
+      text-align: right;
+      max-width: 650px;
+      z-index: 10;
+      animation: fadeSlideInRight 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      animation-delay: 0.2s;
+      opacity: 0;
+    }
+
+    .hero-right h1 {
+      color: var(--brand-copper);
+      font-size: 4.2rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin: 0 0 1.5rem 0;
+    }
+
+    .hero-right h3 {
+      color: var(--white);
+      font-size: 1.55rem;
+      font-weight: 400;
+      margin: 0 0 2rem 0;
+      opacity: 0.95;
+    }
+
+    .hero-right p {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      line-height: 1.7;
+      margin: 0 0 3.5rem 0;
+    }
+
+    /* Call to Action Buttons */
+    .btn-group {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: flex-end;
+    }
+
+    .btn-premium {
+      padding: 1.1rem 2.8rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      border-radius: 4px;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    /* Sweep effect */
+    .btn-premium::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      transform: scaleX(0);
+      transform-origin: right;
+    }
+
+    .btn-premium:hover::before {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .btn-copper {
+      color: var(--brand-darker);
+      background-color: var(--brand-copper);
+      border: 1px solid var(--brand-copper);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-copper::before {
+      background-color: #d8966b;
+    }
+
+    /* Lighter copper */
+    .btn-copper:hover {
+      box-shadow: 0 15px 30px rgba(197, 130, 85, 0.4);
+      transform: translateY(-4px);
+    }
+
+    .btn-outline {
+      color: var(--brand-copper);
+      background-color: transparent;
+      border: 1px solid var(--brand-copper);
+    }
+
+    .btn-outline::before {
+      background-color: rgba(197, 130, 85, 0.1);
+    }
+
+    .btn-outline:hover {
+      transform: translateY(-4px);
+    }
+
+    /* Animations */
+    @keyframes fadeSlideInLeft {
+      0% {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes fadeSlideInRight {
+      0% {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes handsRise {
+      0% {
+        opacity: 0;
+        transform: translate(-40%, 40px) scale(0.95);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translate(-40%, 0) scale(1);
+      }
+    }
+
+    @keyframes handsBreathe {
+      0% {
+        transform: translate(-40%, 0px);
+      }
+
+      50% {
+        transform: translate(-40%, -18px);
+      }
+
+      100% {
+        transform: translate(-40%, 0px);
+      }
+    }
+
+    /* -------------------------------------------
+       Features / Content Section Additions
+    --------------------------------------------- */
+    .features-container {
+      background-color: var(--brand-darker);
+      padding: 8rem 4rem;
+      position: relative;
+    }
+
+    .features-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--brand-copper), transparent);
+      opacity: 0.2;
+    }
+
+    .features-header {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+
+    .features-header h2 {
+      color: var(--white);
+      font-size: 3.5rem;
+      margin: 0 0 1rem 0;
+    }
+
+    .features-header h2 span {
+      color: var(--brand-copper);
+    }
+
+    .features-header p {
+      color: var(--text-muted);
+      max-width: 650px;
+      margin: 0 auto;
+      font-size: 1.2rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(197, 130, 85, 0.1);
+      padding: 3rem 2.5rem;
+      border-radius: 12px;
+      text-align: center;
+      transition: all 0.5s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(197, 130, 85, 0.08) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.5s;
+      pointer-events: none;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-12px);
+      border-color: rgba(197, 130, 85, 0.4);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .stat-card:hover::after {
+      opacity: 1;
+    }
+
+    .stat-number {
+      font-size: 4.5rem;
+      font-weight: 700;
+      color: var(--brand-copper);
+      margin-bottom: 1rem;
+      line-height: 1;
+      font-family: monospace;
+    }
+
+    .stat-title {
+      color: var(--white);
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .stat-desc {
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* Responsive Code */
+    @media (max-width: 1400px) {
+      .hero-left h2 {
+        font-size: 2.2rem;
+      }
+
+      .hero-right h1 {
+        font-size: 3.5rem;
+      }
+
+      .hero-hands-center {
+        bottom: -2%;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .hero-split {
+        flex-direction: column;
+      }
+
+      .hero-left,
+      .hero-right {
+        width: 100vw;
+        align-items: center;
+        text-align: center;
+        padding: 4rem 2rem;
+      }
+
+      .left-content-wrapper,
+      .right-content-wrapper {
+        text-align: center;
+      }
+
+      .hero-hands-center {
+        position: relative;
+        bottom: auto;
+        left: 50%;
+        width: 50vw;
+        transform: translateX(-50%);
+        margin: -5rem 0;
+        animation: none;
+        filter: none;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .btn-group {
+        justify-content: center;
+      }
+
+      nav {
+        justify-content: center;
+        padding: 1.5rem;
+        background: var(--brand-dark) !important;
+        position: static;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <ul class="nav__links">
+      <li class="link"><a href="index.html">HOME</a></li>
+      <li class="link"><a href="about.html">ABOUT US</a></li>
+      <li class="link"><a href="converse.html">CONVERSE</a></li>
+      <li class="link dropdown">
+        <a href="#">GUIDES ▾</a>
+        <ul class="dropdown__menu">
+          <li><a href="schools.html">Schools</a></li>
+          <li><a href="workplaces.html">Workplaces</a></li>
+          <li><a href="public.html">Public Services</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Split Hero Section -->
+  <main class="hero-split">
+
+    <!-- Left Green Side -->
+    <div class="hero-left">
+      <div class="left-content-wrapper">
+        <div class="badge">Next-Gen Recognition</div>
+        <h2>Real-time Indian<br>Sign Language<br>to Text</h2>
+        <p>Translate complex regional ISL gestures into readable text instantly with our ultra-fast, local machine
+          learning engine.</p>
+
+        <div class="left-stats-container">
+          <div class="left-stat">
+            <h4>100%</h4>
+            <span>Private</span>
+          </div>
+          <div class="left-stat">
+            <h4>0ms</h4>
+            <span>Latency</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Center Image overlapping exactly -->
+    <img src="hands2.png" alt="Bridging the communication gap" class="hero-hands-center" />
+
+    <!-- Right Dark Teal Side -->
+    <div class="hero-right">
+      <div class="right-content-wrapper">
+        <h1>Where<br>Accessibility<br>Meets Practicality</h1>
+        <h3>Built for learning, assistance, and real-<br>world interactions</h3>
+        <p>The system is designed to support common communication<br>scenarios such as education, public services, and
+          daily<br>interactions. Its web-based approach makes it easy to deploy<br>and use across different environments
+          without specialized<br>infrastructure.</p>
+
+        <div class="btn-group">
+          <a href="converse.html" class="btn-premium btn-copper">Start Translating</a>
+          <a href="guide.html" class="btn-premium btn-outline">How It Works</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Deep Dive Content Section -->
+  <section class="features-container">
+    <div class="features-header">
+      <h2>The Tech Inside <span>SignLink</span></h2>
+      <p>We leverage cutting-edge localized machine learning to deliver a highly secure, lighting fast, and entirely
+        private translation experience.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="stat-card">
+        <div class="stat-number">42</div>
+        <h3 class="stat-title">Point Landmarks</h3>
+        <p class="stat-desc">Utilizes advanced Google MediaPipe integration to extract 42 high-fidelity 3D structural
+          coordinates across both hands simultaneously.</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">0ms</div>
+        <h3 class="stat-title">Network Latency</h3>
+        <p class="stat-desc">Everything runs directly on your device. Zero frames are sent to the cloud, ensuring total
+          user privacy and instantaneous inference speeds.</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">100%</div>
+        <h3 class="stat-title">Inclusive</h3>
+        <p class="stat-desc">Designed deliberately to lower the barrier of entry for bridging the communication gap.
+          Access the platform from any device with a browser.</p>
+      </div>
+    </div>
+  </section>
+
+</body>
+
+</html>

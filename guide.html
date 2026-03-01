@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>How It Works | SignLink AI</title>
+    <style>
+        body {
+            background-color: #0b0f19;
+            /* dark aesthetic matching the image */
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .guide-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 12rem 2rem 4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .guide-header {
+            text-align: center;
+        }
+
+        .guide-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #00d2ff;
+        }
+
+        .guide-header p {
+            font-size: 1.2rem;
+            color: #a0aec0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .guide-content-split {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .guide-image {
+            flex: 1 1 400px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.2);
+            animation: slideRight 1s ease-out;
+        }
+
+        .guide-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s;
+        }
+
+        .guide-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .steps-wrapper {
+            flex: 1 1 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            animation: slideLeft 1s ease-out;
+        }
+
+        .step-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid #00d2ff;
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .step-card:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+            border-left-color: #3b82f6;
+        }
+
+        .step-card h3 {
+            color: #00d2ff;
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+        }
+
+        .step-card p {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideRight {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideLeft {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Adjusting nav links for dark background */
+        .nav__links .link a {
+            color: #e2e8f0;
+        }
+
+        .nav__links .link a:hover {
+            color: #00d2ff;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul class="nav__links">
+            <li class="link"><a href="index.html">HOME</a></li>
+            <li class="link"><a href="about.html">ABOUT US</a></li>
+            <li class="link"><a href="converse.html">CONVERSE</a></li>
+            <li class="link dropdown">
+                <a href="#">GUIDES ▾</a>
+                <ul class="dropdown__menu">
+                    <li><a href="schools.html">Schools</a></li>
+                    <li><a href="workplaces.html">Workplaces</a></li>
+                    <li><a href="public.html">Public Services</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="guide-container">
+        <div class="guide-header">
+            <h1>How SignLink Works</h1>
+            <p>A simple step-by-step guide explaining how our AI translates sign language in real-time.</p>
+        </div>
+
+        <div class="guide-content-split">
+            <!-- Left Side: AI Glow Image -->
+            <div class="guide-image">
+                <img src="how_it_works.png" alt="AI scanning a human hand" />
+            </div>
+
+            <!-- Right Side: The Steps -->
+            <div class="steps-wrapper">
+                <div class="step-card">
+                    <h3>1. Select Your Category</h3>
+                    <p>Choose the context of your conversation from our dropdown menu (e.g., Alphabets, Numbers,
+                        Workplaces). This allows our machine learning models to focus on the most relevant gestures for
+                        higher accuracy.</p>
+                </div>
+
+                <div class="step-card">
+                    <h3>2. Start Your Camera</h3>
+                    <p>Click the 'Start Camera' button and ensure you are well-lit. Make sure your hands and upper body
+                        are clearly visible to the lens so the algorithm can track every micro-movement.</p>
+                </div>
+
+                <div class="step-card">
+                    <h3>3. AI Landmark Detection</h3>
+                    <p>As you gesture, our backend securely processes the video stream frame by frame using Google's
+                        MediaPipe technology. We extract 21 precise 3D coordinate points from each hand.</p>
+                </div>
+
+                <div class="step-card">
+                    <h3>4. Real-time Translation</h3>
+                    <p>These coordinate points are instantly fed into our custom-trained Neural Networks. Within
+                        milliseconds, the AI predicts the corresponding sign and updates the 'Translated Text' box on
+                        your screen!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

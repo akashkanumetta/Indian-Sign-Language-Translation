@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Converse | SignLink AI</title>
+
+  <!-- Shared styles -->
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="converse_styles.css" />
+
+  <!-- Font (optional but professional) -->
+  <!-- <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    /> -->
+</head>
+
+<body>
+  <!-- Animated Background Shapes -->
+  <div class="bg-shape bg-shape-1"></div>
+  <div class="bg-shape bg-shape-2"></div>
+  <div class="bg-shape bg-shape-3"></div>
+
+  <!-- NAVBAR -->
+  <nav>
+    <ul class="nav__links">
+      <li class="link"><a href="index.html">HOME</a></li>
+      <li class="link"><a href="about.html">ABOUT US</a></li>
+      <li class="link active"><a href="converse.html">CONVERSE</a></li>
+      <li class="link dropdown">
+        <a href="#">GUIDES ▾</a>
+
+        <ul class="dropdown__menu">
+          <li><a href="schools.html">Schools</a></li>
+          <li><a href="workplaces.html">Workplaces</a></li>
+          <li><a href="public.html">Public Services</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- MAIN CONVERSE CONTAINER -->
+  <main class="converse__container">
+    <!-- LEFT: CAMERA FEED -->
+    <section class="camera__section">
+      <h2>Live Camera</h2>
+
+      <div style="margin-bottom: 1rem;">
+        <label for="categorySelect" style="font-weight: 600;">ISL Category:</label>
+        <select id="categorySelect"
+          style="padding: 0.5rem; margin-left: 0.5rem; border-radius: 4px; border: 1px solid #ccc;">
+          <option value="alphabets">Alphabets</option>
+          <option value="basic7">Basic 7</option>
+          <option value="numbers">Numbers</option>
+          <option value="public_places">Public Places</option>
+          <option value="school">School</option>
+          <option value="workplaces">Workplaces</option>
+        </select>
+      </div>
+
+      <div class="camera__card">
+        <div class="status-indicator">
+          <div class="status-dot"></div>
+          <span>LIVE CAM</span>
+        </div>
+        <video id="camera" autoplay muted playsinline></video>
+      </div>
+
+      <div class="camera__controls">
+        <button class="btn btn-premium btn-start" id="startCamera">
+          Start Stream
+        </button>
+        <button class="btn btn-premium btn-stop" id="stopCamera">Stop Stream</button>
+      </div>
+    </section>
+
+    <!-- RIGHT: TRANSLATED TEXT -->
+    <section class="output__section">
+      <h2>Translated Text</h2>
+
+      <div class="output__card">
+        <div class="output__text" id="translatedText">
+          <div class="placeholder-text">Waiting for input stream...</div>
+        </div>
+      </div>
+
+      <div class="output__actions">
+        <button class="btn btn-premium btn-clear" id="clearText">
+          Clear Output Log
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Info Section Below Camera -->
+  <section class="info-section">
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-icon">⚡</div>
+        <h3>Real-Time Engine</h3>
+        <p>Translating hand gestures directly within the browser without external server delays ensures zero-lag
+          translation across ISL models.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">🔒</div>
+        <h3>100% Private</h3>
+        <p>Your camera feed never leaves your device. All video input is analyzed completely locally for an incredibly
+          secure experience.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">🧠</div>
+        <h3>42 Key Landmarks</h3>
+        <p>Powered by ultra-fast Google MediaPipe tracking, the application maps perfect 3D geometric meshes for
+          incredibly high accuracy.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BASIC JS (Camera only – ML hooks ready) -->
+  <script>
+    const video = document.getElementById("camera");
+    const startBtn = document.getElementById("startCamera");
+    const stopBtn = document.getElementById("stopCamera");
+    const translatedText = document.getElementById("translatedText");
+    const categorySelect = document.getElementById("categorySelect");
+
+    let stream = null;
+    let captureInterval = null;
+
+    // Smoothing: keep last N predictions and only display the majority winner
+    const BUFFER_SIZE = 9;
+    const MIN_VOTES = 6;        // prediction must win ≥6/9 frames before display updates
+    let predictionBuffer = [];
+
+    // Create a hidden canvas to capture frames
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
+    async function sendFrame() {
+      if (!stream || video.videoWidth === 0) return;
+
+      // Set canvas dimensions to match video
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      // Convert canvas image to Blob
+      canvas.toBlob(async (blob) => {
+        if (!blob) return;
+
+        const category = categorySelect.value;
+        const formData = new FormData();
+        formData.append("image", blob, "frame.jpg");
+
+        try {
+          // Send to FastAPI with exactly the category name and no trailing slash
+          const response = await fetch(`/api/predict/${category}`, {
+            method: "POST",
+            body: formData,
+          });
+
+          if (!response.ok) {
+            console.error("HTTP error", response.status);
+            return;
+          }
+
+          const data = await response.json();
+          if (data.prediction && data.prediction !== "Waiting for input...") {
+            // Push into rolling buffer
+            predictionBuffer.push(data.prediction);
+            if (predictionBuffer.length > BUFFER_SIZE) {
+              predictionBuffer.shift();
+            }
+
+            // Majority vote: count occurrences of each label
+            const counts = {};
+            predictionBuffer.forEach(p => counts[p] = (counts[p] || 0) + 1);
+            const best = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
+
+            // Only update display if winner clears the confidence threshold
+            if (best[1] >= MIN_VOTES) {
+              translatedText.innerText = best[0];
+            }
+          }
+        } catch (err) {
+          console.error("Prediction error:", err);
+        }
+      }, "image/jpeg", 0.8);
+    }
+
+    startBtn.addEventListener("click", async () => {
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = stream;
+
+        // Capture every 300ms — smoothing buffer prevents flickering
+        predictionBuffer = [];
+        if (captureInterval) clearInterval(captureInterval);
+        captureInterval = setInterval(sendFrame, 300);
+
+        document.querySelector('.status-dot').style.background = '#10b981';
+        document.querySelector('.status-dot').style.boxShadow = '0 0 10px #10b981';
+        translatedText.innerHTML = '<div class="placeholder-text">Analyzing stream...</div>';
+      } catch (err) {
+        alert("Camera access denied.");
+      }
+    });
+
+    stopBtn.addEventListener("click", () => {
+      if (stream) {
+        stream.getTracks().forEach((track) => track.stop());
+        video.srcObject = null;
+      }
+
+      if (captureInterval) {
+        clearInterval(captureInterval);
+        captureInterval = null;
+      }
+
+      document.querySelector('.status-dot').style.background = '#ef4444';
+      document.querySelector('.status-dot').style.boxShadow = 'none';
+      translatedText.innerHTML = '<div class="placeholder-text">Stream offline.</div>';
+    });
+
+    document.getElementById("clearText").addEventListener("click", () => {
+      translatedText.innerHTML = '<div class="placeholder-text">Waiting for input stream...</div>';
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,5 @@
+@media (width<780px) {
+  .link a {
+    color: var(--primary-color);
+  }
+}
