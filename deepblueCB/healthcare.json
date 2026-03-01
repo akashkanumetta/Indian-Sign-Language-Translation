@@ -1,0 +1,237 @@
+[
+  {
+    "name": "Fever",
+    "symptoms": ["high body temperature", "chills", "body pain", "fatigue"],
+    "treatment": ["drink plenty of fluids", "take adequate rest", "use lukewarm sponging", "wear light clothing"]
+  },
+  {
+    "name": "Common Cold",
+    "symptoms": ["runny nose", "sneezing", "nasal congestion", "mild headache"],
+    "treatment": ["drink warm fluids", "steam inhalation", "rest well", "consume vitamin C rich foods"]
+  },
+  {
+    "name": "Cough",
+    "symptoms": ["persistent coughing", "throat irritation", "chest discomfort"],
+    "treatment": ["drink warm water", "honey with ginger", "avoid cold drinks", "steam inhalation"]
+  },
+  {
+    "name": "Sore Throat",
+    "symptoms": ["throat pain", "difficulty swallowing", "dry throat"],
+    "treatment": ["gargle with warm salt water", "drink warm fluids", "avoid spicy food", "rest voice"]
+  },
+  {
+    "name": "Headache",
+    "symptoms": ["head pain", "pressure sensation", "sensitivity to light"],
+    "treatment": ["rest in a quiet room", "drink enough water", "apply cold or warm compress", "reduce screen time"]
+  },
+  {
+    "name": "Indigestion",
+    "symptoms": ["bloating", "stomach discomfort", "nausea"],
+    "treatment": ["eat light meals", "drink warm water", "avoid oily food", "walk after meals"]
+  },
+  {
+    "name": "Acidity",
+    "symptoms": ["burning sensation in chest", "sour taste", "stomach pain"],
+    "treatment": ["drink cold milk", "avoid spicy food", "eat small meals", "do not lie down immediately after eating"]
+  },
+  {
+    "name": "Constipation",
+    "symptoms": ["difficulty passing stool", "hard stools", "abdominal pain"],
+    "treatment": ["increase fiber intake", "drink plenty of water", "exercise regularly", "consume fruits like papaya"]
+  },
+  {
+    "name": "Diarrhea",
+    "symptoms": ["loose stools", "abdominal cramps", "dehydration"],
+    "treatment": ["drink oral rehydration solution", "eat light foods", "avoid dairy temporarily", "rest well"]
+  },
+  {
+    "name": "Vomiting",
+    "symptoms": ["nausea", "throwing up", "weakness"],
+    "treatment": ["sip water slowly", "ginger tea", "avoid solid food initially", "rest"]
+  },
+  {
+    "name": "Body Pain",
+    "symptoms": ["muscle pain", "stiffness", "fatigue"],
+    "treatment": ["warm bath", "light stretching", "adequate rest", "apply warm compress"]
+  },
+  {
+    "name": "Back Pain",
+    "symptoms": ["lower back discomfort", "stiffness", "difficulty bending"],
+    "treatment": ["apply hot compress", "maintain proper posture", "light stretching exercises", "avoid heavy lifting"]
+  },
+  {
+    "name": "Neck Pain",
+    "symptoms": ["neck stiffness", "pain while moving neck"],
+    "treatment": ["warm compress", "gentle neck exercises", "maintain good posture", "limit screen time"]
+  },
+  {
+    "name": "Cold Hands and Feet",
+    "symptoms": ["cold sensation", "numbness"],
+    "treatment": ["wear warm clothing", "massage hands and feet", "stay physically active"]
+  },
+  {
+    "name": "Allergy",
+    "symptoms": ["sneezing", "itchy eyes", "runny nose"],
+    "treatment": ["avoid allergens", "wash face frequently", "keep surroundings clean"]
+  },
+  {
+    "name": "Skin Rash",
+    "symptoms": ["redness", "itching", "small bumps"],
+    "treatment": ["keep area clean", "apply aloe vera", "avoid scratching", "wear loose clothing"]
+  },
+  {
+    "name": "Dry Skin",
+    "symptoms": ["itchiness", "flaky skin"],
+    "treatment": ["apply moisturizer", "drink enough water", "avoid hot showers"]
+  },
+  {
+    "name": "Heat Exhaustion",
+    "symptoms": ["dizziness", "excessive sweating", "weakness"],
+    "treatment": ["move to cool place", "drink water", "rest", "apply cold compress"]
+  },
+  {
+    "name": "Dehydration",
+    "symptoms": ["dry mouth", "dark urine", "fatigue"],
+    "treatment": ["drink water frequently", "consume electrolytes", "avoid excess sun exposure"]
+  },
+  {
+    "name": "Motion Sickness",
+    "symptoms": ["nausea", "dizziness", "sweating"],
+    "treatment": ["sit near window", "avoid heavy meals before travel", "ginger candy"]
+  },
+  {
+    "name": "Eye Strain",
+    "symptoms": ["eye pain", "dry eyes", "blurred vision"],
+    "treatment": ["follow 20-20-20 rule", "blink frequently", "reduce screen brightness"]
+  },
+  {
+    "name": "Mild Toothache",
+    "symptoms": ["tooth pain", "sensitivity"],
+    "treatment": ["rinse with warm salt water", "avoid very hot or cold food", "maintain oral hygiene"]
+  },
+  {
+    "name": "Bad Breath",
+    "symptoms": ["unpleasant mouth odor"],
+    "treatment": ["brush and floss regularly", "drink water", "clean tongue"]
+  },
+  {
+    "name": "Mouth Ulcer",
+    "symptoms": ["painful sores", "burning sensation"],
+    "treatment": ["apply honey", "avoid spicy food", "rinse mouth with salt water"]
+  },
+  {
+    "name": "Gas Problem",
+    "symptoms": ["bloating", "burping", "abdominal discomfort"],
+    "treatment": ["avoid carbonated drinks", "walk after meals", "eat slowly"]
+  },
+  {
+    "name": "Leg Cramps",
+    "symptoms": ["sudden muscle pain", "tightness"],
+    "treatment": ["stretch muscles", "drink enough water", "massage affected area"]
+  },
+  {
+    "name": "Fatigue",
+    "symptoms": ["tiredness", "low energy"],
+    "treatment": ["sleep adequately", "eat balanced diet", "stay hydrated"]
+  },
+  {
+    "name": "Dizziness",
+    "symptoms": ["lightheadedness", "loss of balance"],
+    "treatment": ["sit or lie down", "drink water", "avoid sudden movements"]
+  },
+  {
+    "name": "Sweating Excessively",
+    "symptoms": ["excess sweat", "body odor"],
+    "treatment": ["maintain hygiene", "wear breathable clothes", "stay hydrated"]
+  },
+  {
+    "name": "Minor Cut",
+    "symptoms": ["bleeding", "pain"],
+    "treatment": ["clean with water", "apply antiseptic", "cover with clean bandage"]
+  },
+  {
+    "name": "Minor Burn",
+    "symptoms": ["redness", "pain", "mild swelling"],
+    "treatment": ["cool under running water", "apply aloe vera", "avoid popping blisters"]
+  },
+  {
+    "name": "Itchy Scalp",
+    "symptoms": ["itching", "dry scalp"],
+    "treatment": ["use mild shampoo", "apply coconut oil", "avoid harsh chemicals"]
+  },
+  {
+    "name": "Sleep Disturbance",
+    "symptoms": ["difficulty sleeping", "restlessness"],
+    "treatment": ["maintain sleep schedule", "avoid screens before bed", "drink warm milk"]
+  },
+  {
+    "name": "Mild Anxiety",
+    "symptoms": ["restlessness", "uneasy feeling"],
+    "treatment": ["practice deep breathing", "listen to calming music", "take short walks"]
+  },
+  {
+    "name": "Nasal Congestion",
+    "symptoms": ["blocked nose", "difficulty breathing"],
+    "treatment": ["steam inhalation", "warm fluids", "use saline drops"]
+  },
+  {
+    "name": "Hiccups",
+    "symptoms": ["involuntary hiccups"],
+    "treatment": ["drink cold water", "hold breath briefly", "swallow sugar"]
+  },
+  {
+    "name": "Sunburn",
+    "symptoms": ["red skin", "pain", "peeling"],
+    "treatment": ["apply aloe vera", "drink water", "avoid sun exposure"]
+  },
+  {
+    "name": "Mild Ear Pain",
+    "symptoms": ["ear discomfort", "pressure"],
+    "treatment": ["apply warm compress", "keep ear dry", "avoid inserting objects"]
+  },
+  {
+    "name": "Dry Eyes",
+    "symptoms": ["eye irritation", "burning sensation"],
+    "treatment": ["rest eyes", "blink frequently", "use cold compress"]
+  },
+  {
+    "name": "Chapped Lips",
+    "symptoms": ["dry cracked lips"],
+    "treatment": ["apply lip balm", "drink water", "avoid licking lips"]
+  },
+  {
+    "name": "Mild Swelling",
+    "symptoms": ["localized swelling", "mild pain"],
+    "treatment": ["apply cold compress", "elevate affected area", "rest"]
+  },
+  {
+    "name": "Loss of Appetite",
+    "symptoms": ["reduced hunger", "weakness"],
+    "treatment": ["eat small frequent meals", "drink fluids", "light exercise"]
+  },
+  {
+    "name": "Nausea",
+    "symptoms": ["uneasy stomach", "urge to vomit"],
+    "treatment": ["ginger tea", "eat bland foods", "rest"]
+  },
+  {
+    "name": "Throat Dryness",
+    "symptoms": ["dry throat", "irritation"],
+    "treatment": ["drink warm water", "honey", "avoid smoking"]
+  },
+  {
+    "name": "Cold Sweats",
+    "symptoms": ["clammy skin", "chills"],
+    "treatment": ["rest", "drink water", "keep body warm"]
+  },
+  {
+    "name": "Mild Joint Pain",
+    "symptoms": ["joint stiffness", "pain"],
+    "treatment": ["warm compress", "light exercise", "rest joints"]
+  },
+  {
+    "name": "Runny Nose",
+    "symptoms": ["nasal discharge", "frequent wiping"],
+    "treatment": ["steam inhalation", "drink warm fluids", "rest"]
+  }
+]
